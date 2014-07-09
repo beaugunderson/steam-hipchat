@@ -1,0 +1,14 @@
+{
+  "name": "steam-hipchat",
+  "version": "0.0.1",
+  "description": "Get alerts in HipChat when your friends play games on Steam",
+  "main": "index.js",
+  "author": "Beau Gunderson <beau@beaugunderson.com>",
+  "license": "BSD",
+  "keywords": ["steam", "hipchat"],
+  "dependencies": {
+    "hipchat-client": "^1.0.2",
+    "lodash": "^2.4.1",
+    "steam": "^0.6.6"
+  }
+}
