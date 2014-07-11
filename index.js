@@ -11,6 +11,8 @@ var hipchat = new HipchatClient(process.env.HIPCHAT_TOKEN);
 var FRIENDS = _.zipObject(process.env.USER_IDS.split(','),
                           process.env.USER_NAMES.split(','));
 
+var PLAYING = {};
+
 function message(text, color, notify) {
   hipchat.api.rooms.message({
     room_id: process.env.HIPCHAT_ROOM,
@@ -80,8 +82,14 @@ steam.on('user', function (user) {
   if (user.gameName) {
     message(util.format('%s is now playing %s', profileUrl, gameUrl), 'green',
             1);
+
+    PLAYING[user.friendid] = user.gameid;
   } else {
-    message(util.format('%s is no longer playing a game', profileUrl),
-            'yellow', 0);
+    if (PLAYING[user.friendid]) {
+      message(util.format('%s is no longer playing a game', profileUrl),
+              'yellow', 0);
+
+      delete PLAYING[user.friendid];
+    }
   }
 });
